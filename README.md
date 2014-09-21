@@ -20,10 +20,11 @@ A role for installing dropbox.
       - dropbox
 
 ```
-[workstation:vars]
-user=albandri
-version=10
-home=/workspace/users/{{ user }}{{ version }}/      
+  [dropbox:vars]
+  user=albandri
+  version=10
+  home=/workspace/users/{{ user }}{{ version }}/
+  
 ```
 
 ## License

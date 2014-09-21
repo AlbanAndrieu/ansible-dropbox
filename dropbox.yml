@@ -1,0 +1,9 @@
+---
+- hosts: all
+  sudo: True
+  roles:
+    - ansible-dropbox
+     
+  vars:     
+       user: root
+       home: /root

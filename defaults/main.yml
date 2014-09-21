@@ -1,2 +1,5 @@
 ---
 dropbox_enabled: yes                       # Enable module
+
+dropbox_owner                              : "{{ user }}"
+dropbox_owner_home                         : "{{ home }}"

@@ -1,14 +1,24 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
+- name: Check user  
+  user: name={{dropbox_owner}} state=present
+  
+- name: Check user home directory
+  stat: path={{dropbox_owner_home}}
+  register: home_present
+
+- debug: msg="Path exists and is a directory"
+  when: home_present.stat.isdir is defined and home_present.stat.isdir == true
+  
 - name: Install Dropbox control script
   get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755
 
 - name: Install Dropbox
-  shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ home }}/.dropbox-dist/dropboxd
+  shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
   
 - name: Configure KDE to autostart dropboxd
-  file: path={{ home }}/.kde/Autostart/dropboxd src={{ home }}/.dropbox-dist/dropboxd state=link
+  file: path={{ dropbox_owner_home }}/.kde/Autostart/dropboxd src={{ dropbox_owner_home }}/.dropbox-dist/dropboxd state=link
   ignore_errors: True
     
 - name: Check dropboxd status
