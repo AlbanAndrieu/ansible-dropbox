@@ -1,5 +1,7 @@
 ---
 dropbox_enabled: yes                       # Enable module
 
+user                                       : 'albandri' #please override me
 dropbox_owner                              : "{{ user }}"
+home                                       : '~' #please override me
 dropbox_owner_home                         : "{{ home }}"
