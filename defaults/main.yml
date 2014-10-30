@@ -7,6 +7,7 @@ dropbox_owner: "{{ user }}"
 #home: '~' #please override me
 home: "{{ lookup('env','HOME') }}"
 dropbox_owner_home: "{{ home }}"
+dropbox_user_state: present
 
 docker_files_generated_directory: "./"
 docker_files_enable: no

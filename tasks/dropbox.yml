@@ -2,7 +2,7 @@
 # This playbook contains common plays that will be run on all nodes.
 
 - name: Check user  
-  user: name={{ dropbox_owner }} state=present
+  user: name={{ dropbox_owner }} state={{ dropbox_user_state }}
   
 - name: Check user home directory
   stat: path={{ dropbox_owner_home }}
