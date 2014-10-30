@@ -2,10 +2,10 @@
 # This playbook contains common plays that will be run on all nodes.
 
 - name: Check user  
-  user: name={{dropbox_owner}} state=present
+  user: name={{ dropbox_owner }} state=present
   
 - name: Check user home directory
-  stat: path={{dropbox_owner_home}}
+  stat: path={{ dropbox_owner_home }}
   register: home_present
 
 - debug: msg="Path exists and is a directory"

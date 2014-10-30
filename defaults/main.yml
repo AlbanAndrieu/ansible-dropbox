@@ -1,7 +1,15 @@
 ---
 dropbox_enabled: yes                       # Enable module
 
-user                                       : 'albandri' #please override me
-dropbox_owner                              : "{{ user }}"
-home                                       : '~' #please override me
-dropbox_owner_home                         : "{{ home }}"
+#user: 'albandri' #please override me
+user: "{{ lookup('env','USER') }}"
+dropbox_owner: "{{ user }}"
+#home: '~' #please override me
+home: "{{ lookup('env','HOME') }}"
+dropbox_owner_home: "{{ home }}"
+
+docker_files_generated_directory: "./"
+docker_files_enable: no
+docker_volume_directory: "{{ dropbox_owner_home }}"
+docker_working_directory: "/home/vagrant"
+docker_image_name: "nabla/ansible-dropbox"

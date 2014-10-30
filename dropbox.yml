@@ -1,9 +1,11 @@
 ---
 - hosts: all
-  sudo: True
+  sudo: true
   roles:
-    - ansible-dropbox
-     
-  vars:     
-       user: root
-       home: /root
+    - { role: ./,
+        docker_files_enable: yes
+        #user: "root",
+        #home: "/root"     
+      }
+
+#- include: docker/integration-tests.yml
