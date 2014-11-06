@@ -4,10 +4,15 @@ dropbox_enabled: yes                       # Enable module
 #user: 'albandri' #please override me
 user: "{{ lookup('env','USER') }}"
 dropbox_owner: "{{ user }}"
+dropbox_group: "{{ dropbox_owner }}"
 #home: '~' #please override me
 home: "{{ lookup('env','HOME') }}"
 dropbox_owner_home: "{{ home }}"
 dropbox_user_state: present
+
+dropbox_directory: "{{ dropbox_owner_home }}/.dropbox"
+dropbox_user_directory: "/workspace/Dropbox"
+dropbox_user_host : "2366450895"
 
 docker_files_generated_directory: "./"
 docker_files_enable: no

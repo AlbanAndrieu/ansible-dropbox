@@ -37,7 +37,7 @@ ansigenome_info:
       github: 'AlbanAndrieu'
       
   synopsis: |
-    Ensures that google drive 9grive) is properly installed (using `apt`) and configured  
+    Ensures that dropbox is properly installed (using `apt`) and configured  
 
   usage: |
     Describe how to use in more detail...

@@ -1,30 +1,55 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- name: Check user  
+- name: dropbox | Check user  
   user: name={{ dropbox_owner }} state={{ dropbox_user_state }}
   
-- name: Check user home directory
+- name: dropbox | Check user home directory
   stat: path={{ dropbox_owner_home }}
   register: home_present
 
-- debug: msg="Path exists and is a directory"
+- debug: msg="dropbox | Path exists and is a directory"
   when: home_present.stat.isdir is defined and home_present.stat.isdir == true
+
+- name: dropbox | Create user directory
+  file:
+    dest="{{ dropbox_user_directory }}"
+    state=directory
+    owner="{{ dropbox_owner }}"
+    group="{{ dropbox_group }}"
+  tags: dropbox_setup
+
+- name: dropbox | Create base directory
+  file:
+    dest="{{ dropbox_directory }}"
+    state=directory
+    owner="{{ dropbox_owner }}"
+    group="{{ dropbox_group }}"
+  tags: dropbox_setup
+
+- name: dropbox | Add dropbox configuration.
+  template:
+    src: "info.json.j2"
+    dest: "{{ dropbox_directory }}/info.json"
+    owner: "{{ dropbox_owner }}"
+    group: "{{ dropbox_group }}"
+    mode: 0644
+#  notify: restart dropbox
   
-- name: Install Dropbox control script
+- name: dropbox | Install Dropbox control script
   get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755
 
-- name: Install Dropbox
+- name: dropbox | Install Dropbox
   shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
   
-- name: Configure KDE to autostart dropboxd
+- name: dropbox | Configure KDE to autostart dropboxd
   file: path={{ dropbox_owner_home }}/.kde/Autostart/dropboxd src={{ dropbox_owner_home }}/.dropbox-dist/dropboxd state=link
   ignore_errors: True
     
-- name: Check dropboxd status
+- name: dropbox | Check dropboxd status
   command: /usr/local/bin/dropbox.py status
   register: status
   
-- name: Start dropboxd
+- name: dropbox | Start dropboxd
   shell: /usr/local/bin/dropbox.py start >/dev/null 2>&1
   when: status.stdout == "Dropbox isn't running!"
