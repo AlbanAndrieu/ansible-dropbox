@@ -2,7 +2,7 @@
 
 [![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-dropbox.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-dropbox) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-dropbox.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-dropbox/tree/master)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-AlbanAndrieu.dropbox-660198.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1999) [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
-Ensures that google drive 9grive) is properly installed (using `apt`) and configured
+Ensures that dropbox is properly installed (using `apt`) and configured
 
 ### Installation
 
@@ -23,10 +23,15 @@ List of default variables available in the inventory:
     #user: 'albandri' #please override me
     user: "{{ lookup('env','USER') }}"
     dropbox_owner: "{{ user }}"
+    dropbox_group: "{{ dropbox_owner }}"
     #home: '~' #please override me
     home: "{{ lookup('env','HOME') }}"
     dropbox_owner_home: "{{ home }}"
     dropbox_user_state: present
+    
+    dropbox_directory: "{{ dropbox_owner_home }}/.dropbox"
+    dropbox_user_directory: "{{ dropbox_owner_home }}/Dropbox"
+    dropbox_user_host : "1234567890"
     
     docker_files_generated_directory: "./"
     docker_files_enable: no
