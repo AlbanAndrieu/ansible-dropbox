@@ -1,10 +1,11 @@
 ---
+dependencies: []
 
 galaxy_info:
   author: Alban Andrieu
   description: A role for installing dropbox
   company: Nabla
-  license: MIT
+  license: GPLv3
   min_ansible_version: 1.6.3
   platforms:
   - name: Ubuntu
@@ -22,5 +23,24 @@ galaxy_info:
   categories:
   - development
   - cloud
-dependencies: []
 
+ansigenome_info:
+  galaxy_id: '1999'
+
+  travis: True
+
+  authors:
+    - name:  'Alban Andrieu'
+      url: 'fr.linkedin.com/in/nabla/'
+      email: 'alban.andrieu@free.fr'
+      twitter: 'AlbanAndrieu'
+      github: 'AlbanAndrieu'
+      
+  synopsis: |
+    Ensures that google drive 9grive) is properly installed (using `apt`) and configured  
+
+  usage: |
+    Describe how to use in more detail...
+
+  #custom: |
+  #  Any custom output you want after the usage section..
