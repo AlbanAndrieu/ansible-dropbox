@@ -38,7 +38,8 @@
   
 - name: dropbox | Install Dropbox control script
   get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755
-
+  sudo: yes
+  
 - name: dropbox | Install Dropbox
   shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
   
