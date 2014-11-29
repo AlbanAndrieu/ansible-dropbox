@@ -26,7 +26,9 @@ galaxy_info:
 
 ansigenome_info:
   galaxy_id: '1999'
-
+  galaxy_user: 'alban.andrieu'
+  galaxy_name: 'dropbox'
+  
   travis: True
 
   authors:

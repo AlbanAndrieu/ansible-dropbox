@@ -1,6 +1,6 @@
-## dropbox
+## alban.andrieu.dropbox
 
-[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-dropbox.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-dropbox) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-dropbox.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-dropbox/tree/master) [![Donate](https://img.shields.io/gratipay/AlbanAndrieu.svg?style=flat)](https://www.gratipay.com/AlbanAndrieu)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-AlbanAndrieu.dropbox-blue.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1999) [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
+[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-dropbox.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-dropbox) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-dropbox.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-dropbox/tree/master) [![Donate](https://img.shields.io/gratipay/AlbanAndrieu.svg?style=flat)](https://www.gratipay.com/AlbanAndrieu)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-alban.andrieu.dropbox-blue.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1999) [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
 Ensures that dropbox is properly installed (using `apt`) and configured
 
@@ -10,7 +10,7 @@ This role requires at least Ansible `v1.6.3`.
 
 To install it, run:
 
-    ansible-galaxy install AlbanAndrieu.dropbox
+    ansible-galaxy install alban.andrieu.dropbox
 
 
 
@@ -19,8 +19,7 @@ To install it, run:
 List of default variables available in the inventory:
 
 ```yaml
-    ---
-    dropbox_enabled: yes                       # Enable module
+        dropbox_enabled: yes                       # Enable module
     
     #user: 'albandri' #please override me
     user: "{{ lookup('env','USER') }}"
@@ -45,12 +44,14 @@ List of default variables available in the inventory:
 
 ### Detailed usage guide
 
-Describe how to use in more detail...
+Run the following command :
+
+`ansible-playbook -i hosts -c local -v dropbox.yml -vvvv --ask-sudo-pass | tee setup.log`
 
 
 ### Authors and license
 
-`dropbox` role was written by:
+`alban.andrieu.dropbox` role was written by:
 - [Alban Andrieu](fr.linkedin.com/in/nabla/) | [e-mail](mailto:alban.andrieu@free.fr) | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/AlbanAndrieu)
 - License: [GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
 

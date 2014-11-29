@@ -1,4 +1,3 @@
----
 dropbox_enabled: yes                       # Enable module
 
 #user: 'albandri' #please override me
