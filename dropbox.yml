@@ -3,9 +3,10 @@
   sudo: true
   roles:
     - { role: ./,
+        dropbox_utilities_enabled : no,
         docker_files_enable: yes
         #user: "root",
-        #home: "/root"     
+        #home: "/root"
       }
 
 #- include: docker/integration-tests.yml
