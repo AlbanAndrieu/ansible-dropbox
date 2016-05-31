@@ -50,7 +50,7 @@
 - name: dropbox | Install dropbox utilities
   apt: pkg={{ item }} state=present update_cache=yes
   sudo: yes
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and dropbox_utilities_enabled_enabled
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and dropbox_utilities_enabled
   tags: package
   with_items:
    - nautilus-dropbox
