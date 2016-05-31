@@ -12,6 +12,7 @@ dropbox_user_state: present
 dropbox_directory: "{{ dropbox_owner_home }}/.dropbox"
 dropbox_user_directory: "{{ dropbox_owner_home }}/Dropbox"
 dropbox_user_host : "1234567890"
+dropbox_utilities_enabled : yes
 
 docker_files_generated_directory: "./"
 docker_files_enable: no

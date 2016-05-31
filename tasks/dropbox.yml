@@ -1,9 +1,9 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- name: dropbox | Check user  
+- name: dropbox | Check user
   user: name={{ dropbox_owner }} state={{ dropbox_user_state }}
-  
+
 - name: dropbox | Check user home directory
   stat: path={{ dropbox_owner_home }}
   register: home_present
@@ -35,22 +35,31 @@
     group: "{{ dropbox_group }}"
     mode: 0644
 #  notify: restart dropbox
-  
+
 - name: dropbox | Install Dropbox control script
   get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755
   sudo: yes
-  
+
 - name: dropbox | Install Dropbox
   shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
-  
+
 - name: dropbox | Configure KDE to autostart dropboxd
   file: path={{ dropbox_owner_home }}/.kde/Autostart/dropboxd src={{ dropbox_owner_home }}/.dropbox-dist/dropboxd state=link
   ignore_errors: True
-    
+
+- name: dropbox | Install dropbox utilities
+  apt: pkg={{ item }} state=present update_cache=yes
+  sudo: yes
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and dropbox_utilities_enabled_enabled
+  tags: package
+  with_items:
+   - nautilus-dropbox
+   - libappindicator1
+
 - name: dropbox | Check dropboxd status
   command: /usr/local/bin/dropbox.py status
   register: status
-  
+
 - name: dropbox | Start dropboxd
   shell: /usr/local/bin/dropbox.py start >/dev/null 2>&1
   when: status.stdout == "Dropbox isn't running!"
