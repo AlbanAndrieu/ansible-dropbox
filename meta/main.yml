@@ -6,7 +6,7 @@ galaxy_info:
   description: A role for installing dropbox
   company: Nabla
   license: GPLv3
-  min_ansible_version: 1.6.3
+  min_ansible_version: 2.1.1
   platforms:
   - name: Ubuntu
     versions:
@@ -23,28 +23,3 @@ galaxy_info:
   categories:
   - development
   - cloud
-
-ansigenome_info:
-  galaxy_id: '1999'
-  galaxy_user: 'alban.andrieu'
-  galaxy_name: 'dropbox'
-  
-  travis: True
-
-  authors:
-    - name:  'Alban Andrieu'
-      url: 'fr.linkedin.com/in/nabla/'
-      email: 'alban.andrieu@free.fr'
-      twitter: 'AlbanAndrieu'
-      github: 'AlbanAndrieu'
-      
-  synopsis: |
-    Ensures that dropbox is properly installed (using `apt`) and configured  
-
-  usage: |
-    Run the following command :
-    
-    `ansible-playbook -i hosts -c local -v dropbox.yml -vvvv --ask-sudo-pass | tee setup.log`
-
-  #custom: |
-  #  Any custom output you want after the usage section..
