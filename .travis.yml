@@ -1,12 +1,16 @@
 ---
-language: python
-python: "2.7"
-env:
-  - ANSIBLE_VERSION=2.1.1
+
+#language: python
+#python: "2.7"
+
 cache: bundler
 #sudo: false
 sudo: required
 dist: trusty
+
+env:
+  - ANSIBLE_VERSION=2.1.1
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt python-pycurl
@@ -18,7 +22,7 @@ install:
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 script:
   - sudo ansible --version
-  - export ANSIBLE_ROLES_PATH="../"
+#  - export ANSIBLE_ROLES_PATH="../"
 #  - echo localhost > inventory
   - sudo ansible-playbook -i hosts --syntax-check dropbox.yml
   - sudo ansible-playbook -i hosts --connection=local --sudo -vvvv dropbox.yml

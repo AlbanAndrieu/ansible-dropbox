@@ -37,7 +37,7 @@
 #  notify: restart dropbox
 
 - name: dropbox | Install Dropbox control script
-  get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755
+  get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755 validate_certs=no
   sudo: yes
 
 - name: dropbox | Install Dropbox
