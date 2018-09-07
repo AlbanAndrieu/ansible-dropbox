@@ -39,12 +39,34 @@
   ignore_errors: true    
 #  notify: restart dropbox
 
-- name: dropbox | Install Dropbox control script
-  get_url: dest=/usr/local/bin/dropbox.py url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755 validate_certs=no
-  become: yes
+- block:        # block for installing on Debian derivitives
+  - name: dropbox | Install Dropbox key
+    apt_key:
+      keyserver: pgp.mit.edu
+      id: 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
 
-- name: dropbox | Install Dropbox
-  shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
+  - name: dropbox | Install Dropbox repository
+    apt_repository:
+      repo: deb [arch=i386,amd64] http://linux.dropbox.com/{{ dropbox_apt_repo }} {{ dropbox_apt_release }} main
+      state: present
+      filename: dropbox
+
+  - name: dropbox | Install Dropbox
+    apt:
+      name: dropbox
+      state: present
+    
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- block:        # block for installing on other Linux
+  - name: dropbox | Install Dropbox control script
+    get_url: dest=/usr/local/bin/dropbox url=https://www.dropbox.com/download?dl=packages/dropbox.py mode=0755 validate_certs=no
+    become: yes
+
+  - name: dropbox | Install Dropbox
+    shell: curl -L "https://www.dropbox.com/download?plat=lnx.{{ ansible_architecture }}" | tar -C $HOME -xzf - creates={{ dropbox_owner_home }}/.dropbox-dist/dropboxd
+  when: ansible_os_family != 'Debian'
 
 - name: dropbox | Configure KDE to autostart dropboxd
   file: path={{ dropbox_owner_home }}/.kde/Autostart/dropboxd src={{ dropbox_owner_home }}/.dropbox-dist/dropboxd state=link
@@ -60,9 +82,9 @@
    - libappindicator1
 
 - name: dropbox | Check dropboxd status
-  command: /usr/local/bin/dropbox.py status
+  command: dropbox status
   register: status
 
 - name: dropbox | Start dropboxd
-  shell: /usr/local/bin/dropbox.py start >/dev/null 2>&1
+  shell: dropbox start >/dev/null 2>&1
   when: status.stdout == "Dropbox isn't running!"
