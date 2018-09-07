@@ -28,7 +28,7 @@
     group="{{ dropbox_group }}"
   tags: dropbox_setup
   ignore_errors: true
-  
+
 - name: dropbox | Add dropbox configuration.
   template:
     src: "info.json.j2"
