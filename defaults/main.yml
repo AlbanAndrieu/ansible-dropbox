@@ -13,6 +13,8 @@ dropbox_directory: "{{ dropbox_owner_home }}/.dropbox"
 dropbox_user_directory: "{{ dropbox_owner_home }}/Dropbox"
 dropbox_user_host : "1234567890"
 dropbox_utilities_enabled : yes
+# One of "KDE" or "systemd_user", or left undefined to not autostart dropbox
+dropbox_autostart: KDE
 
 dropbox_apt_repo: ubuntu
 dropbox_apt_release: xenial

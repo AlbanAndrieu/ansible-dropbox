@@ -70,7 +70,26 @@
 
 - name: dropbox | Configure KDE to autostart dropboxd
   file: path={{ dropbox_owner_home }}/.kde/Autostart/dropboxd src={{ dropbox_owner_home }}/.dropbox-dist/dropboxd state=link
-  ignore_errors: True
+  when: dropbox_autostart == "KDE"
+
+- block:        # block for SystemD user autostart
+  - name: dropbox | Install SystemD dropboxd service
+    template: src=dropbox.service dest=/etc/systemd/user/dropbox.service
+
+  # Workaround for systemd user services bug in ansible prior to 2.6
+  - name: dropbox | Get uid of {{ dropbox_owner }} for SystemD autostart
+    command: id -u {{ dropbox_owner }}
+    register: dropbox_owner_uid
+    changed_when: false
+
+  - name: dropbox | Configure SystemD to autostart dropboxd
+    systemd: name=dropbox.service user=yes enabled=yes
+    environment:
+      XDG_RUNTIME_DIR: /run/user/{{ dropbox_owner_uid.stdout }}
+    become: true
+    become_user: "{{ dropbox_owner }}"
+    # become_method: machinectl   # replacement for workaround on ansible > 2.6
+  when: dropbox_autostart == "systemd_user"
 
 - name: dropbox | Install dropbox utilities
   apt: pkg={{ item }} state=present update_cache=yes

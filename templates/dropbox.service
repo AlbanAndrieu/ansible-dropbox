@@ -1,0 +1,10 @@
+[Unit]
+Description=Dropbox
+
+[Service]
+ExecStart=/usr/bin/dropbox start -i
+Type=forking
+PIDFile=%h/.dropbox/dropbox.pid
+
+[Install]
+WantedBy=default.target
