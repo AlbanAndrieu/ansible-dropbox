@@ -97,7 +97,7 @@
   when: ansible_os_family == 'Debian' and dropbox_utilities_enabled
   tags: package
   with_items:
-   - nautilus-dropbox
+          #   - nautilus-dropbox
    - libappindicator1
 
 - name: dropbox | Check dropboxd status
