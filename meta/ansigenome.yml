@@ -1,28 +1,4 @@
 ---
-dependencies: []
-
-galaxy_info:
-  author: Alban Andrieu
-  description: A role for installing dropbox
-  company: Nabla
-  license: Apache
-  min_ansible_version: 2.3.1.0
-  platforms:
-  - name: Ubuntu
-    versions:
-    - all
-    - lucid
-    - maverick
-    - natty
-    - oneiric
-    - precise
-    - quantal
-    - raring
-    - saucy
-    - trusty
-  categories:
-  - development
-  - cloud
 
 ansigenome_info:
   galaxy_id: '1999'
